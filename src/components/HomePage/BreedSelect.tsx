@@ -11,7 +11,7 @@ const StyledDiv = styled.div`
 `;
 
 const StyledSelect = styled(Form.Select)`
-  width: 15rem;
+  width: 100%;
 `;
 
 const BreedSelect = () => {
@@ -19,7 +19,6 @@ const BreedSelect = () => {
 
   return (
     <StyledDiv>
-      <h1>Cat Breeds</h1>
       <StyledSelect onChange={handleSelectChange}>
         <option value="">Select a breed</option>
         <option value="aege">Aege</option>

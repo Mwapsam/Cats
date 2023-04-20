@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { HomePage, SingleCatPage } from "./components"
+import { HomePage, Nav, SingleCatPage } from "./components"
 import { CatProvider } from './context/CatContext';
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
 
   return (
     <CatProvider>
+      <Nav />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/cat/:id' element={<SingleCatPage />} />

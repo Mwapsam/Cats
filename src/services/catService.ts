@@ -21,7 +21,7 @@ export async function fetchCatsByBreed(breedId: string, page: number): Promise<C
     });    
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch cats');
+    throw new Error('Apologies but we could not load new cats for you at this time! Miau!');
   }
 }
 
@@ -36,6 +36,6 @@ export async function fetchBreedById(breedId: string): Promise<Breed> {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw new Error('Failed to fetch breed');
+    throw new Error('Apologies but we could not load new cats for you at this time! Miau!');
   }
 }

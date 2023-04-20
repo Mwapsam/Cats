@@ -10,6 +10,7 @@ type CatContextType = {
   isLoading: boolean;
   error: Error | null;
   handleSelectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
+  defaultImage: string
 };
 
 const CatContext = createContext<CatContextType>({
@@ -19,7 +20,8 @@ const CatContext = createContext<CatContextType>({
   loadMoreCats: () => {},
   isLoading: false,
   error: null,
-  handleSelectChange: () => {}
+  handleSelectChange: () => {},
+  defaultImage: ''
 });
 
 const CatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -28,6 +30,7 @@ const CatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
+  const [defaultImage, setDefaultImage] = useState('');
 
   useEffect(() => {
     const fetchCats = async () => {
@@ -48,6 +51,22 @@ const CatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
   }, [selectedBreed, page]);
 
+  useEffect(() => {
+    const fetchDefaultImage = async () => {
+      try{
+        setIsLoading(true);
+        const response = await fetch('https://api.thecatapi.com/v1/images/0XYvRd7oD');
+        const data = await response.json();
+        setDefaultImage(data.url);
+      }catch (err: any) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+  }
+    fetchDefaultImage();
+  }, []);
+
   const loadMoreCats = () => {
     setPage((prevPage) => prevPage + 1);
   };
@@ -60,7 +79,7 @@ const CatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <CatContext.Provider
-      value={{ cats, selectedBreed, setSelectedBreed, loadMoreCats, isLoading, error, handleSelectChange }}
+      value={{ cats, selectedBreed, setSelectedBreed, loadMoreCats, isLoading, error, handleSelectChange, defaultImage }}
     >
       {children}
     </CatContext.Provider>
