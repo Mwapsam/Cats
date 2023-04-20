@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card, Spinner, Button,  Container, Alert, Col } from 'react-bootstrap';
+import { Card, Spinner, Button,  Container, Alert, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useCatContext } from '../../context/CatContext';
 import BreedSelect from './BreedSelect';
@@ -8,8 +8,8 @@ import BreedInfo from './BreedInfo';
 const CardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
+  justify-content: evenly;
+  gap: 3rem;
 `;
 const StyledCard = styled(Card)`
   overflow: hidden;
@@ -47,11 +47,11 @@ const HomePage = (props: Props) => {
             </SpinnerContainer>
             )  : (<>
             <BreedSelect />
-            <div className="d-flex mt-5">
-                <div className="w-100 w-md-30 p-3">
+            <Row className='my-5'>
+                <Col sm={12} md={3}>
                     <BreedInfo cats={cats} />
-                </div>
-              <div className='d-flex flex-wrap'>
+                </Col>
+              <Col md={9}>
               <CardWrapper>
                     {cats.map((cat) => (
                         <Col xs={12} sm={6} md={4} lg={3} key={cat.id}>
@@ -66,15 +66,13 @@ const HomePage = (props: Props) => {
                         </Col>
                     ))}
                 </CardWrapper>
-
                 {cats.length !== 0 && (
-                    <div className="text-center m-4 w-100">
+                    <div className="mx-auto m-4 w-100">
                         <Button onClick={loadMoreCats}>Load More</Button>
                     </div>
                 )}
-              </div>
-
-            </div>
+              </Col>
+            </Row>
           </>)}
     </Container>
   );

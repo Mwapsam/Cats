@@ -14,7 +14,7 @@ const BreedInfo = ({cats}: Props ) => {
   }
 
   return (
-    <Card style={{width: '14rem'}}>
+    <Card>
       <Card.Header>{selectedBreed}</Card.Header>
       <Card.Body>
         <Card.Title>{selectedCat.breeds[0].name}</Card.Title>
