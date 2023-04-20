@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card, Spinner, Button,  Container, Alert } from 'react-bootstrap';
+import { Card, Spinner, Button,  Container, Alert, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useCatContext } from '../../context/CatContext';
 import BreedSelect from './BreedSelect';
@@ -12,7 +12,6 @@ const CardWrapper = styled.div`
   gap: 12px;
 `;
 const StyledCard = styled(Card)`
-  width: 20rem;
   overflow: hidden;
   height: 16.5rem;
 `;
@@ -31,9 +30,7 @@ const SpinnerContainer = styled.div`
 type Props = {}
 
 const HomePage = (props: Props) => {
-  const { cats, isLoading, error, loadMoreCats } = useCatContext();
-  console.log(cats);
-  
+  const { cats, isLoading, error, loadMoreCats } = useCatContext();  
 
   return (
     <Container>
@@ -45,24 +42,31 @@ const HomePage = (props: Props) => {
             </SpinnerContainer>
             )  : (<>
             <BreedSelect />
-            <div className="d-flex mt-5">
-              <div className="w-30 p-3">
-                  <BreedInfo cats={cats} />
-              </div>
+            <div className="d-flex flex-wrap mt-5">
+                <div className="w-100 w-md-30 p-3">
+                    <BreedInfo cats={cats} />
+                </div>
               <div className='d-flex flex-column'>
-                <CardWrapper>
+              <CardWrapper>
                     {cats.map((cat) => (
-                        <StyledCard key={cat.id}>
+                        <Col xs={12} sm={6} md={4} lg={3} key={cat.id}>
+                        <StyledCard>
                             <StyledImage variant="top" src={cat.url} />
                             <Link to={`/cat/${cat.id}`}>
-                                <Button variant="secondary" style={{width: '100%', borderRadius: 0}}>View Details</Button>
+                            <Button variant="secondary" style={{ width: "100%", borderRadius: 0 }}>
+                                View Details
+                            </Button>
                             </Link>
                         </StyledCard>
+                        </Col>
                     ))}
                 </CardWrapper>
-                {cats.length !== 0 && <div className='text-center m-4'>
-                    <Button onClick={loadMoreCats}>Load More</Button> 
-                </div>}
+
+                {cats.length !== 0 && (
+                    <div className="text-center m-4 w-100">
+                        <Button onClick={loadMoreCats}>Load More</Button>
+                    </div>
+                )}
               </div>
 
             </div>

@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { Container, Row, Col, Image } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useCatContext } from '../../context/CatContext';
