@@ -25,9 +25,9 @@ export async function fetchCatsByBreed(breedId: string, page: number): Promise<C
   }
 }
 
-export async function fetchBreedById(breedId: string): Promise<Breed> {
+export async function fetchOneCat(): Promise<Breed> {
   try {
-    const response = await axios.get(`${BASE_URL}/breeds/${breedId}`, {
+    const response = await axios.get('https://api.thecatapi.com/v1/images/0XYvRd7oD', {
       headers: {
         'x-api-key': API_KEY,
       },

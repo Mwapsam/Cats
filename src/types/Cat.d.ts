@@ -13,6 +13,7 @@ export interface Cat {
   }
   
   export interface Breed {
+    url(url: any): unknown;
     id: string;
     name: string;
     origin: string;

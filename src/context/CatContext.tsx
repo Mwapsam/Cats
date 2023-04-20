@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Cat } from '../types/Cat';
-import { fetchCatsByBreed } from '../services/catService';
+import { fetchCatsByBreed, fetchOneCat } from '../services/catService';
 
 type CatContextType = {
   cats: Cat[];
@@ -30,7 +30,7 @@ const CatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [defaultImage, setDefaultImage] = useState('');
+  const [defaultImage, setDefaultImage] = useState<string>('');
 
   useEffect(() => {
     const fetchCats = async () => {
@@ -55,9 +55,8 @@ const CatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const fetchDefaultImage = async () => {
       try{
         setIsLoading(true);
-        const response = await fetch('https://api.thecatapi.com/v1/images/0XYvRd7oD');
-        const data = await response.json();
-        setDefaultImage(data.url);
+        const response: any = await fetchOneCat();        
+        setDefaultImage(response.url);
       }catch (err: any) {
         setError(err);
       } finally {

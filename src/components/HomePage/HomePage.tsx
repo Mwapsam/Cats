@@ -27,26 +27,6 @@ const SpinnerContainer = styled.div`
   height: 100vh;
 `;
 
-const StyledContainer = styled(Row)`
-  @media (max-width: 768px) {
-    .mt-5 {
-      margin-top: 0;
-    }
-    .card {
-      margin-bottom: 1.5rem;
-    }
-    .card-img-top {
-      height: auto;
-    }
-    .card-body {
-      padding: 1.25rem;
-    }
-    .card-title {
-      font-size: 1.5rem;
-    }
-  }
-`;
-
 
 type Props = {}
 
@@ -88,15 +68,15 @@ const HomePage = (props: Props) => {
             </>
 
             <Row className='my-5'>
-                <Col sm={12} md={3}>
+                <Col sm={12} md={3} className='mb-3'>
                     <BreedInfo cats={cats} />
                 </Col>
-              <Col md={9}>
+              <Col md={9} >
               <CardWrapper>
                     {cats.map((cat) => (
                         <Col xs={12} sm={6} md={4} lg={3} key={cat.id}>
                         <StyledCard>
-                            <StyledImage variant="top" src={cat.url} />
+                            <StyledImage variant="top" src={cat.url || '/placeholder.jpg'} />
                             <Link to={`/cat/${cat.id}`}>
                             <Button variant="secondary" style={{ width: "100%", borderRadius: 0 }}>
                                 View Details
@@ -107,8 +87,8 @@ const HomePage = (props: Props) => {
                     ))}
                 </CardWrapper>
                 {cats.length !== 0 && (
-                    <div className="mx-auto m-4 w-100">
-                        <Button onClick={loadMoreCats}>Load More</Button>
+                    <div className="text-center m-4 w-100">
+                        <Button variant="secondary" onClick={loadMoreCats}>Load More</Button>
                     </div>
                 )}
               </Col>

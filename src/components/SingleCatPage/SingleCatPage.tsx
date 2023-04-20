@@ -43,7 +43,7 @@ const SingleCatPage = () => {
             <Col md={6}>
                 <Image src={selectedCat.url} alt={selectedCat.breeds[0].name} fluid />
             </Col>
-            <Col md={6}>
+            <Col md={6}  className='py-3'>
             <h2>{selectedCat.breeds[0].name}</h2>
             <p>{selectedCat.breeds[0].description}</p>
                 <Card style={{border: 'none'}} className='p-4'>
