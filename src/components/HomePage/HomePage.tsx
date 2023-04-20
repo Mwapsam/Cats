@@ -27,6 +27,11 @@ const SpinnerContainer = styled.div`
   height: 100vh;
 `;
 
+const StyledContainer = styled(Container)`
+  max-width: 1200px;
+`;
+
+
 type Props = {}
 
 const HomePage = (props: Props) => {
@@ -42,11 +47,11 @@ const HomePage = (props: Props) => {
             </SpinnerContainer>
             )  : (<>
             <BreedSelect />
-            <div className="d-flex flex-wrap mt-5">
+            <div className="d-flex mt-5">
                 <div className="w-100 w-md-30 p-3">
                     <BreedInfo cats={cats} />
                 </div>
-              <div className='d-flex flex-column'>
+              <div className='d-flex flex-wrap'>
               <CardWrapper>
                     {cats.map((cat) => (
                         <Col xs={12} sm={6} md={4} lg={3} key={cat.id}>
